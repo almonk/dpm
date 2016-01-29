@@ -1,0 +1,5 @@
+= palette
+
+Generate this with
+    palette rdoc
+After you have described your command line interface
