@@ -12,7 +12,7 @@ Let's create a DPM Palette file to distribute to my team so that we can keep our
 
 I'll create a new Palette.json file wit the command `palette touch`.
 
-This creates a skeleton Palette file in the local directory. Let's open it and add some fonts and Skethc plugins we use on this project. The resulting Palette.json file should look something like this...
+This creates a skeleton Palette file in the local directory. Let's open it and add some fonts and Sketch plugins we use on this project. The resulting Palette.json file should look something like this...
 
 ```JSON
 {
