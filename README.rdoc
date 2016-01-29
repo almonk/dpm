@@ -1,6 +1,0 @@
-= palette
-
-Describe your project here
-
-:include:palette.rdoc
-
