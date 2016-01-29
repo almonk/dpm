@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    palette (0.0.1)
+    dpm (0.0.1)
       gli (= 2.13.4)
 
 GEM
@@ -17,6 +17,7 @@ GEM
     builder (3.2.2)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
+    colorize (0.7.7)
     contracts (0.13.0)
     crack (0.4.3)
       safe_yaml (~> 1.0.0)
@@ -38,6 +39,8 @@ GEM
     json (1.8.3)
     multi_json (1.11.2)
     multi_test (0.1.2)
+    open_uri_redirections (0.2.1)
+    progressbar (0.21.0)
     rake (10.5.0)
     rdoc (4.2.1)
       json (~> 1.4)
@@ -45,6 +48,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    rubyzip (1.1.7)
     safe_yaml (1.0.4)
     thor (0.19.1)
 
@@ -53,10 +57,14 @@ PLATFORMS
 
 DEPENDENCIES
   aruba
+  colorize
   crack
-  palette!
+  dpm!
+  open_uri_redirections
+  progressbar
   rake
   rdoc
+  rubyzip (>= 1.0.0)
 
 BUNDLED WITH
    1.10.6
