@@ -10,7 +10,7 @@ DPM is perfect for design collaboration with Sketch. A DPM Palette.json file let
 
 Let's create a DPM Palette file to distribute to my team so that we can keep our fonts & Sketch plugins in sync when working on a project.
 
-I'll create a new Palette.json file wit the command `palette touch`.
+I'll create a new Palette.json file with the command `palette touch`.
 
 This creates a skeleton Palette file in the local directory. Let's open it and add some fonts and Sketch plugins we use on this project. The resulting Palette.json file should look something like this...
 
