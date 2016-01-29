@@ -60,18 +60,22 @@ command :touch do |c|
     working_directory = Dir.pwd
     local_palettefile = "#{working_directory}/Palette.json"
 
-    tempHash = {
+    if File.exists?(local_palettefile)
+      puts "Palette.json already exists".red
+    else
+      tempHash = {
         "name" => "My Project",
         "author" => "",
         "version" => "1.0",
-        "fonts" => [""],
-        "sketch_plugins" => [""]
-    }
+        "fonts" => [],
+        "sketch_plugins" => []
+      }
 
-    File.open("Palette.json","w") do |f|
-      pprint = tempHash.to_json
-      if f.write(JSON.pretty_generate(JSON.parse(pprint)))
-        puts "Created Palette.json".green
+      File.open("Palette.json","w") do |f|
+        pprint = tempHash.to_json
+        if f.write(JSON.pretty_generate(JSON.parse(pprint)))
+          puts "Created Palette.json".green
+        end
       end
     end
   end

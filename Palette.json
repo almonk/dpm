@@ -1,12 +1,11 @@
 {
-  "name" : "Sample Project",
-  "author" : "Alasdair Monk",
-  "version" : 1.0,
-  "fonts" : [
-    "http://www.fontsquirrel.com/fonts/download/Inconsolata",
-    "http://www.fontsquirrel.com/fonts/download/junicode",
+  "name": "My Project",
+  "author": "",
+  "version": "1.0",
+  "fonts": [
+
   ],
-  "sketch_plugins" : [
-    "https://github.com/fnky/sketch-dockpreview/archive/master.zip"
+  "sketch_plugins": [
+
   ]
 }
