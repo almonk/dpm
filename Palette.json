@@ -4,6 +4,7 @@
   "version": "1.0",
   "sketch_plugins": [
     "marvelapp/marvel-sketch",
-    "matt-curtis/fluid-for-sketch"
+    "matt-curtis/fluid-for-sketch",
+    "marcosvidal/Sketch-Notebook"
   ]
 }

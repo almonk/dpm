@@ -39,7 +39,11 @@ command :install do |c|
   c.desc 'Installs dependencies from a local Palette.json'
   c.action do |global_options,options,args|
     if args.first != nil
-      install_single_sketch_plugin(args.first)
+      if args[1] != nil && args[1] == "--save"
+        install_and_save_single_sketch_plugin(args.first)
+      else
+        install_single_sketch_plugin(args.first)
+      end
     else
       working_directory = Dir.pwd
       local_palettefile = "#{working_directory}/Palette.json"
@@ -66,7 +70,7 @@ command :init do |c|
       puts "Palette.json already exists".red
     else
       tempHash = {
-        "name" => "My Project",
+        "name" => " My Project",
         "author" => "",
         "version" => "1.0",
         "sketch_plugins" => []
@@ -107,33 +111,6 @@ def clean_palette_tmp_dir
   system "rm -rf .palette && mkdir .palette"
 end
 
-def install_fonts(local_palettefile)
-  fonts_to_install = []
-  file = File.read local_palettefile
-  manifest = Crack::JSON.parse(file)
-
-  puts "#{manifest['name']} #{manifest['version']}".blue
-
-  if manifest['fonts']
-    manifest['fonts'].each do |font_url|
-      download_file(font_url, SecureRandom.hex)
-    end
-
-    Dir.glob(".palette/**/*.otf").each do |unzipped_files|
-      fonts_to_install << unzipped_files
-      @font_install_count += 1
-    end
-
-    Dir.glob(".palette/**/*.ttf").each do |unzipped_files|
-      fonts_to_install << unzipped_files
-      @font_install_count += 1
-    end
-
-    puts "Installing fonts..."
-    system "open #{fonts_to_install.join(" ")}"
-  end
-end
-
 def install_sketch_plugins(local_palettefile)
   plugins_to_install = []
 
@@ -172,6 +149,36 @@ def install_single_sketch_plugin(args)
   end
 
   puts "Installed Sketch plugins #{args}".green
+end
+
+def install_and_save_single_sketch_plugin(args)
+  working_directory = Dir.pwd
+  local_palettefile = "#{working_directory}/Palette.json"
+
+  if File.exists?(local_palettefile)
+    install_single_sketch_plugin(args)
+
+    file = File.read local_palettefile
+    manifest = Crack::JSON.parse(file)
+
+    tempHash = {
+      "name" => manifest['name'],
+      "author" => manifest['author'],
+      "version" => manifest['version'],
+      "sketch_plugins" => manifest['sketch_plugins']
+    }
+
+    tempHash['sketch_plugins'] << args
+
+    File.open("Palette.json","w") do |f|
+      pprint = tempHash.to_json
+      if f.write(JSON.pretty_generate(JSON.parse(pprint)))
+        puts "Saved to Palette.json file".green
+      end
+    end
+  else
+    raise "No Palette.json file exists".red
+  end
 end
 
 def download_file(url, unique_id)

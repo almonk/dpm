@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    dpm (0.0.2)
+    dpm (0.0.4)
       gli (= 2.13.4)
 
 GEM
