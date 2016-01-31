@@ -1,11 +1,9 @@
 {
   "name": "My Project",
-  "author": "",
+  "author": "Alasdair Monk",
   "version": "1.0",
-  "fonts": [
-
-  ],
   "sketch_plugins": [
-
+    "marvelapp/marvel-sketch",
+    "matt-curtis/fluid-for-sketch"
   ]
 }

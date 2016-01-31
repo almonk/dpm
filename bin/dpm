@@ -30,7 +30,6 @@ subcommand_option_handling :normal
 
 # Constants
 @sketch_plugins_dir = "#{Dir.home}/Library/Application Support/com.bohemiancoding.sketch3/Plugins/".gsub(/ /, '\ ')
-@font_install_count = 0
 @sketch_plugin_install_count = 0
 
 # Begin setup
@@ -39,22 +38,25 @@ arg_name 'Describe arguments to list here'
 command :install do |c|
   c.desc 'Installs dependencies from a local Palette.json'
   c.action do |global_options,options,args|
-    working_directory = Dir.pwd
-    local_palettefile = "#{working_directory}/Palette.json"
-
-    if File.exists? local_palettefile
-      clean_palette_tmp_dir
-      install_fonts(local_palettefile)
-      install_sketch_plugins(local_palettefile)
-      puts "Palette complete. #{@font_install_count} fonts, #{@sketch_plugin_install_count} Sketch plugins now installed.".green
+    if args.first != nil
+      install_single_sketch_plugin(args.first)
     else
-      raise "No Palette.json found.".red
+      working_directory = Dir.pwd
+      local_palettefile = "#{working_directory}/Palette.json"
+
+      if File.exists? local_palettefile
+        clean_palette_tmp_dir
+        install_sketch_plugins(local_palettefile)
+        puts "Palette complete. #{@sketch_plugin_install_count} Sketch plugins now installed.".green
+      else
+        raise "No Palette.json found.".red
+      end
     end
   end
 end
 
 desc 'Creates a sample Palette.json in the local directory'
-command :touch do |c|
+command :init do |c|
   c.desc 'Creates a sample Palette.json in the local directory'
   c.action do |global_options,options,args|
     working_directory = Dir.pwd
@@ -67,7 +69,6 @@ command :touch do |c|
         "name" => "My Project",
         "author" => "",
         "version" => "1.0",
-        "fonts" => [],
         "sketch_plugins" => []
       }
 
@@ -141,7 +142,7 @@ def install_sketch_plugins(local_palettefile)
 
   if manifest['sketch_plugins']
     manifest['sketch_plugins'].each do |plugin_url|
-      download_file(plugin_url, SecureRandom.hex)
+      download_file("https://github.com/#{plugin_url}/archive/master.zip", SecureRandom.hex)
     end
 
     puts "Installing Sketch plugins..."
@@ -156,6 +157,21 @@ def install_sketch_plugins(local_palettefile)
       @sketch_plugin_install_count += 1
     end
   end
+end
+
+def install_single_sketch_plugin(args)
+  puts "Installing Sketch plugin #{args}..."
+  download_file("https://github.com/#{args}/archive/master.zip", SecureRandom.hex)
+
+  Dir.glob(".palette/**/*.sketchplugin").each do |unzipped_files|
+    parent = File.basename(File.expand_path("..", unzipped_files))
+    filename = File.basename(unzipped_files)
+
+    system "[ -d #{@sketch_plugins_dir}#{parent} ] || mkdir -p #{@sketch_plugins_dir}#{parent}"
+    system "cp -r #{unzipped_files.gsub(/ /, '\ ')} #{@sketch_plugins_dir}#{parent}/#{filename.gsub(/ /, '\ ')}"
+  end
+
+  puts "Installed Sketch plugins #{args}".green
 end
 
 def download_file(url, unique_id)
