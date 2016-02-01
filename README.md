@@ -1,6 +1,6 @@
-# DPM
+# dpm
 
-DPM is an experimental package manager for Sketch. It allows you to simply keep plugins in sync across teams and devices.
+dpm is an experimental package manager for Sketch. It allows you to simply keep plugins in sync across teams and devices.
 
 ### Getting started
 `gem install dpm`
@@ -29,7 +29,7 @@ Find a list of Sketch plugins you can use with dpm [here](https://github.com/ske
 
 
 ### Limitations
-* DPM currently **only** supports installing from repos publicly available on Github
+* dpm currently **only** supports installing from repos publicly available on Github
 * Currenly only works with Sketch plugins
 * Install only, no uninstall
 * Probably a ton of bugs
