@@ -31,4 +31,5 @@ Find a list of Sketch plugins you can use with dpm [here](https://github.com/ske
 ### Limitations
 * DPM currently **only** supports installing from repos publicly available on Github
 * Currenly only works with Sketch plugins
+* Install only, no uninstall
 * Probably a ton of bugs
