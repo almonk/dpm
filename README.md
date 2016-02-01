@@ -5,7 +5,7 @@ dpm is an experimental package manager for Sketch. It allows you to simply keep 
 ### Getting started
 `gem install dpm`
 
-### Basic sage
+### Basic usage
 Init a Palette.json file
 
 ```
