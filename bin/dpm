@@ -70,7 +70,7 @@ command :init do |c|
       puts "Palette.json already exists".red
     else
       tempHash = {
-        "name" => " My Project",
+        "name" => "My Project",
         "author" => "",
         "version" => "1.0",
         "sketch_plugins" => []
